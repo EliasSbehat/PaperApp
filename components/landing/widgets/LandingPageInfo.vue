@@ -11,7 +11,7 @@
         <div
           v-for="(block, i) in blocks"
           :key="i"
-          class="px-8 py-9 rounded-2xl shadow-md bg-white text-center flex-1"
+          class="px-8 py-9 rounded-2xl drop-shadow-[4px_4px_8px_rgba(0,0,0,0.3)] bg-white text-center flex-1"
         >
           <img
             :src="block.img"

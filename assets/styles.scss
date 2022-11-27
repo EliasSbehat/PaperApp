@@ -12,7 +12,12 @@
 }
 html {
   @apply text-paperdazgray-600;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
+  // font-family: 'Poppins', sans-serif;
+}
+
+html * {
+  font-family: 'Poppins' !important;
 }
 
 body {
@@ -52,7 +57,7 @@ html, body {
   padding-right: 5%;
   padding-left: 5%;
   // max-width: unset;
-  max-width: 1200px;
+  // max-width: 1200px;
 }
 .nav-container {
   margin-left: auto;

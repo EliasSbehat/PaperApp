@@ -130,10 +130,10 @@ export default Vue.extend({
             // code goes in here
           })
   },
-  beforeRouteLeave(to, from, next) {
-    location.href = to.fullPath
-    return
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   location.href = to.fullPath
+  //   return
+  // },
   data() {
     return {
       windowOnLoad : true,

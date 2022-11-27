@@ -4,11 +4,11 @@
       class="flex flex-wrap flex-col gap-10 lg:gap-5 lg:flex-row items-center container py-12"
     >
       <div class="flex flex-col gap-2 items-center">
-        <logo-with-text class="h-5 xs:h-6 sm:h-7" />
+        <logo-with-text class="h-17 xs:h-6 sm:h-10 w-auto" />
         <span class="text-[#888392]">Contactless Paper</span>
       </div>
       <div
-        class="flex-1 flex flex-wrap flex-col lg:flex-row items-center gap-3 sm:gap-10 text-[#6C6777] justify-center"
+        class="flex-1 flex flex-wrap flex-col lg:flex-row items-center gap-15 sm:gap-16 text-[#6C6777] justify-center"
       >
         <a href="/#key-features-section">Features</a>
         <nuxt-link to="/packages/?type=default">Packages</nuxt-link>
@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-paperdazgreen-400 py-3">
+    <div class="bg-paperdazgreen-500 py-3">
       <div class="container flex items-center justify-center text-white">
         <small>iambui LLC, Paperdaz &copy; Copyright 2020, All Rights Reserved </small>
       </div>

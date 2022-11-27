@@ -17,6 +17,7 @@ module.exports = {
       colors: {
         paperdazgreen: {
           50: '#EEF7EC',
+          70: '#a6e480',//hover
           100: '#EAFFE5',
           200: '#ebf4e5',
           230: '#c8ebb2',

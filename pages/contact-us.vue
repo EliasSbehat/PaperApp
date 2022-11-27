@@ -61,10 +61,10 @@ export default Vue.extend({
       ],
     }
   },
-  beforeRouteLeave(to, from, next) {
-    location.href = to.fullPath
-    return
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   location.href = to.fullPath
+  //   return
+  // },
   data() {
     return {
       currentActiveCard: 2,

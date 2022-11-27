@@ -84,10 +84,10 @@ export default Vue.extend({
       ],
     }
   },
-  beforeRouteLeave(to, from, next) {
-    location.href = to.fullPath
-    return
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   location.href = to.fullPath
+  //   return
+  // },
   mounted(){
      this.tabLevel = Number(this.$route.query.tablevel)
   },

@@ -31,10 +31,10 @@ import LandingDivider from '~/components/landing/widgets/LandingDivider.vue'
     LandingJoinSection,
     LandingDivider,
   },
-  beforeRouteLeave(to, from, next) {
-    location.href = to.fullPath
-    return
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   location.href = to.fullPath
+  //   return
+  // },
 
 })
 export default class LandingPage extends Vue {

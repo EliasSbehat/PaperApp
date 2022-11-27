@@ -90,10 +90,10 @@ export default mixins(GlobalMixin).extend({
       ],
     }
   },
-  beforeRouteLeave(to, from, next) {
-    location.href = to.fullPath
-    return
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   location.href = to.fullPath
+  //   return
+  // },
 
   mounted() {
     console.log('package-query', this.$route.query)

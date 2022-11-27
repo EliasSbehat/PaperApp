@@ -1,10 +1,10 @@
 <template>
   <div
-    class="sticky z-20 h-14 py-2 transition ease-in-out bg-white"
+    class="sticky z-20 h-14 pt-5 pb-5 transition ease-in-out bg-white"
     :class="{
       'shadow-md': scrolled,
     }"
-    style="top: -0.1px"
+    style="top: -0.1px; padding-top: 48px"
   >
     <nav class="container h-full flex items-center justify-between">
       <div class="flex items-center gap-1">
@@ -19,7 +19,7 @@
         </nuxt-link>
       </div>
       <div
-        class="transition left-0 transform text-sm font-medium gap-4 fixed top-0 bottom-0 w-56 flex flex-col p-6 lg:shadow-none lg:items-center lg:gap-9 lg:p-0 lg:relative lg:bg-transparent lg:w-auto lg:flex-row lg:translate-x-0"
+        class="transition left-0 transform bg-lime-50 text-sm font-medium gap-8 fixed top-0 bottom-0 w-56 flex flex-col p-6 lg:shadow-none lg:items-center lg:gap-9 lg:p-0 lg:relative lg:bg-transparent lg:w-auto lg:flex-row lg:translate-x-0"
         :class="[collapsed ? 'translate-x-0' : '-translate-x-56']"
       >
         <div class="flex justify-end lg:hidden">
@@ -56,11 +56,13 @@
           <nuxt-link to="/login" class="text-paperdazgreen-300 mt-5"
             >Sign in</nuxt-link
           >
-          <nuxt-link
-            to="/register"
-            class="bg-paperdazgreen-300 text-white h-8 rounded shadow px-3 flex items-center justify-center whitespace-nowrap"
-            >Get Started</nuxt-link
-          >
+          <div class="getstart-btn">
+            <nuxt-link
+              to="/register"
+              class="bg-paperdazgreen-300 hover:bg-paperdazgreen-70 transition duration-0 hover:duration-150 transition duration-0 hover:duration-150 text-white h-9 w-28 rounded shadow px-3 flex items-center justify-center whitespace-nowrap"
+              >Get Started</nuxt-link
+            >
+          </div>
         </div>
         <div class="grid w-full place-items-center lg:hidden">
           <el-dropdown
@@ -70,20 +72,20 @@
           >
             <span class="flex items-center el-dropdown-link">
               <span
-              class="border border-paperdazgreen-300 mr-2 p-0.5 overflow-hidden relative"
-              :class="[
-                isPaidUser
-                  ? 'w-[45px] h-[45px] rounded-md'
-                  : 'circle-20 rounded-full',
-              ]"
-            >
-              <img
-                :src="profilePhoto"
-                class="w-full h-full profilePhoto"
-                alt=""
-                :class="[isPaidUser ? 'rounded-md' : 'rounded-full']"
-              />
-            </span>
+                class="border border-paperdazgreen-300 mr-2 p-0.5 overflow-hidden relative"
+                :class="[
+                  isPaidUser
+                    ? 'w-[45px] h-[45px] rounded-md'
+                    : 'circle-20 rounded-full',
+                ]"
+              >
+                <img
+                  :src="profilePhoto"
+                  class="w-full h-full profilePhoto"
+                  alt=""
+                  :class="[isPaidUser ? 'rounded-md' : 'rounded-full']"
+                />
+              </span>
               <span class="text-gray-500"
                 ><arrow-down-icon class="h-1 w-1.5 sm:h-2.5 sm:w-4"
               /></span>
@@ -110,7 +112,7 @@
         </div>
       </div>
       <div
-        class="flex items-center gap-1.5 xs:gap-3 sm:gap-5 text-xs xs:text-sm sm:text-base md:text-ls"
+        class="flex items-center gap-3 xs:gap-4 sm:gap-6 text-xs xs:text-sm sm:text-base md:text-ls"
       >
         <button type="button" @click="showLandingPageSearchModal = true">
           <search-icon width="15" />
@@ -121,12 +123,14 @@
           class="text-paperdazgreen-300"
           >Sign in</nuxt-link
         >
-        <nuxt-link
-          v-if="!$auth.loggedIn"
-          to="/register"
-          class="bg-paperdazgreen-300 text-white h-7 xs:h-8 rounded shadow px-2 xs:px-3 flex items-center justify-center whitespace-nowrap"
-          >Get Started</nuxt-link
-        >
+        <div class="getstart-btn">
+          <nuxt-link
+            v-if="!$auth.loggedIn"
+            to="/register"
+            class="bg-paperdazgreen-300 hover:bg-paperdazgreen-70 transition duration-0 hover:duration-150 text-white h-9 w-28 xs:h-9 rounded shadow px-2 xs:px-3 flex items-center justify-center whitespace-nowrap"
+            >Get Started</nuxt-link
+          >
+        </div>
         <el-dropdown
           trigger="click"
           @command="handleCommand"
@@ -134,20 +138,20 @@
         >
           <span class="flex items-center el-dropdown-link">
             <span
-            class="border border-paperdazgreen-300 mr-2 p-0.5 overflow-hidden relative"
-            :class="[
-              isPaidUser
-                ? 'w-[45px] h-[45px] rounded-md'
-                : 'circle-20 rounded-full',
-            ]"
-          >
-            <img
-              :src="profilePhoto"
-              class="w-full h-full profilePhoto"
-              alt=""
-              :class="[isPaidUser ? 'rounded-md' : 'rounded-full']"
-            />
-          </span>
+              class="border border-paperdazgreen-300 mr-2 p-0.5 overflow-hidden relative"
+              :class="[
+                isPaidUser
+                  ? 'w-[45px] h-[45px] rounded-md'
+                  : 'circle-20 rounded-full',
+              ]"
+            >
+              <img
+                :src="profilePhoto"
+                class="w-full h-full profilePhoto"
+                alt=""
+                :class="[isPaidUser ? 'rounded-md' : 'rounded-full']"
+              />
+            </span>
             <span class="text-gray-500"
               ><arrow-down-icon class="h-1 w-1.5 sm:h-2.5 sm:w-4"
             /></span>
@@ -192,7 +196,7 @@ import GearIcon from '../svg-icons/GearIcon.vue'
 import HamburgerIcon from '../svg-icons/HamburgerIcon.vue'
 import SearchIcon from '../svg-icons/SearchIcon.vue'
 import SignOutIcon from '../svg-icons/SignOutIcon.vue'
-import UserProfileSolidIcon from '../svg-icons/UserProfileSolidIcon.vue';
+import UserProfileSolidIcon from '../svg-icons/UserProfileSolidIcon.vue'
 import UserTypeEnum from '~/models/UserTypeEnum'
 
 export default mixins(GlobalMixin).extend({
@@ -223,7 +227,7 @@ export default mixins(GlobalMixin).extend({
     },
   },
   computed: {
-    routeName(){
+    routeName() {
       return (this.$nuxt.$route.name || '').replace(/-/g, ' ')
     },
     user() {
