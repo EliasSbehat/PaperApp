@@ -7,7 +7,7 @@
         :class="{ second: tabLevel >= 2, third: tabLevel >= 3 }"
       >
         <div
-          class="tab-indicator-circle circle circle-30 font-medium"
+          class="tab-indicator-circle circle circle-30 border-8 font-medium"
           :class="{ active: tabLevel >= 1 }"
         >
           $

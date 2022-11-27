@@ -37,7 +37,7 @@
       </li>
     </ul>
     <div class="px-8">
-      <p class="text-center text-[#909090] mb-6 font-medium">Share</p>
+      <p class="text-center text-[#909090] mb-6 font-medium">Find us on</p>
       <div class="flex flex-wrap items-center gap-2 justify-center">
         <span
          @click="socialShareFunction('facebook')"

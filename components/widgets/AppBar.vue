@@ -1,11 +1,14 @@
 <template>
   <div
-    class="sticky z-20 h-14 pt-5 pb-5 transition ease-in-out bg-white"
+    class="sticky z-20 h-14 pt-5 pb-5 transition ease-in-out"
     :class="{
       'shadow-md': scrolled,
+      'bg-white': scrolled,
     }"
     style="top: -0.1px; padding-top: 48px"
+    id="appbar"
   >
+    <div class="" :class="collapsed?'overlay':''"></div>
     <nav class="container h-full flex items-center justify-between">
       <div class="flex items-center gap-1">
         <span
@@ -18,33 +21,37 @@
           <logo-with-text class="mr-2 h-5 xs:h-6 sm:h-7 w-auto" />
         </nuxt-link>
       </div>
+      <!-- mobile -->
+      <!------>
       <div
-        class="transition left-0 transform bg-lime-50 text-sm font-medium gap-8 fixed top-0 bottom-0 w-56 flex flex-col p-6 lg:shadow-none lg:items-center lg:gap-9 lg:p-0 lg:relative lg:bg-transparent lg:w-auto lg:flex-row lg:translate-x-0"
+        class="flex flex-col bg-white h-full w-full rounded-2xl py-8 transition left-0 transform bg-lime-50 text-sm font-medium gap-8 fixed top-0 bottom-0 w-56 flex flex-col p-6 lg:shadow-none lg:items-center lg:gap-9 lg:p-0 lg:relative lg:bg-transparent lg:w-auto lg:flex-row lg:translate-x-0"
         :class="[collapsed ? 'translate-x-0' : '-translate-x-56']"
       >
         <div class="flex justify-end lg:hidden">
           <span
-            class="circle circle-15 bg-paperdazgray-100 cursor-pointer"
+            class="circle circle-15 cursor-pointer"
             @click="collapsed = false"
-            >&times;</span
+            ><times-icon width="12" height="12" /></span
           >
         </div>
         <div class="w-full flex justify-center lg:hidden">
-          <nuxt-link to="/">
-            <logo-with-text class="mb-4 h-7" />
+          <nuxt-link to="/" class="flex items-center justify-center mb-14 px-8">
+            <logo-with-text class="h-8 w-auto" />
           </nuxt-link>
         </div>
-        <a href="/#key-features-section" class="">Features </a>
-        <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
-        <!-- <a href="/#upload-file-section" class="">Upload File </a> -->
-        <!-- <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div> -->
-        <nuxt-link to="/packages/?type=default" class="">Packages </nuxt-link>
-        <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
-        <nuxt-link to="/about" class="">About </nuxt-link>
-        <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
-        <nuxt-link to="/faq" class="">FAQ</nuxt-link>
-        <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
-        <nuxt-link to="/contact-us" class="">Contact Us </nuxt-link>
+       
+          <a href="/#key-features-section" class="">Features </a>
+          <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
+          <!-- <a href="/#upload-file-section" class="">Upload File </a> -->
+          <!-- <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div> -->
+          <nuxt-link to="/packages/?type=default" class="">Packages </nuxt-link>
+          <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
+          <nuxt-link to="/about" class="">About </nuxt-link>
+          <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
+          <nuxt-link to="/faq" class="">FAQ</nuxt-link>
+          <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
+          <nuxt-link to="/contact-us" class="">Contact Us </nuxt-link>
+
         <div
           class="h-px bg-paperdazgray-300 w-full lg:hidden"
           v-if="!$auth.loggedIn"
@@ -198,6 +205,7 @@ import SearchIcon from '../svg-icons/SearchIcon.vue'
 import SignOutIcon from '../svg-icons/SignOutIcon.vue'
 import UserProfileSolidIcon from '../svg-icons/UserProfileSolidIcon.vue'
 import UserTypeEnum from '~/models/UserTypeEnum'
+import TimesIcon from '../svg-icons/TimesIcon.vue'
 
 export default mixins(GlobalMixin).extend({
   name: 'AppBar',
@@ -209,6 +217,7 @@ export default mixins(GlobalMixin).extend({
     UserProfileSolidIcon,
     GearIcon,
     SignOutIcon,
+    TimesIcon,
     DashboardIcon,
     LandingPageSearchModal,
   },
@@ -294,3 +303,25 @@ export default mixins(GlobalMixin).extend({
   },
 })
 </script>
+<style lang="scss" scoped>
+#appbar {
+  & .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    opacity: 1;
+    pointer-events: none;
+    transition: all ease-in-out 200ms;
+  }
+}
+
+// .active{
+//   opacity: 1 !important;
+//   background: rgba(0, 0, 0, 0.2);
+// }
+</style>

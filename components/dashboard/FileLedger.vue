@@ -21,7 +21,7 @@
 
         <button
           @click="show = !show"
-          class="circle circle-18 bg-paperdazgreen-400 text-white"
+          class="circle circle-18 bg-paperdazgreen-400 text-white hover:bg-paperdazgreen-70 transition duration-0 hover:duration-150 transition duration-0 hover:duration-150"
         >
           <search-icon width="16" height="16" currentcolor="white"/>
         </button>

@@ -27,7 +27,7 @@
       >
         <article class="mb-6 md:mb-10">
           <header class="header">
-            <h2>Our Mission</h2>
+            <h1 class="md:text-[50px]">Our Mission</h1>
           </header>
           <main>
             <p class="body">
@@ -38,7 +38,7 @@
 
         <article class="mb-6 md:mb-10">
           <header class="header">
-            <h2>Our Vision</h2>
+            <h1 class="md:text-[50px]">Our Vision</h1>
           </header>
           <main>
             <p class="body">Our vision is to replace paper with Paperdaz</p>
@@ -47,7 +47,7 @@
 
         <article>
           <header class="header">
-            <h2>Our Goal</h2>
+            <h1 class="md:text-[50px]">Our Goal</h1>
           </header>
           <main>
             <p class="body">

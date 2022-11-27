@@ -32,8 +32,8 @@
                   Simply register for a paid package, a QR code will be generated for each business account and for each Paperdaz file.
                 </p>
                 <div class="flex justify-center mt-3">
-                  <button class="h-10 rounded-md shadow-md text-white bg-paperdazgreen-300 px-5 text-[13px]">
-                    <nuxt-link to="/register">Paperdaz Your Business</nuxt-link>
+                  <button class="h-10 rounded-md shadow-md text-white bg-paperdazgreen-300 px-5 text-[13px] bg-paperdazgreen-300 hover:bg-paperdazgreen-70 transition duration-0 hover:duration-150 transition duration-0 hover:duration-150 text-white rounded shadow px-3 flex items-center justify-center whitespace-nowrap">
+                    <nuxt-link to="/register" class="hover:text-white	">Paperdaz Your Business</nuxt-link>
                   </button>
                 </div>
               </div>

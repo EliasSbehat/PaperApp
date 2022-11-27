@@ -37,8 +37,10 @@ export default Vue.extend({
   @apply cursor-pointer bg-white rounded-2xl flex flex-col items-center justify-center sm:flex-row sm:justify-between sm:items-center;
   padding: 16px 14px;
   border: 0.97221px solid rgba(119, 181, 80, 0.15);
+  transition: all 0.3s ease-in-out;
   &.active,
   &:hover {
+    
     @apply bg-paperdazgreen-300;
     & * {
       @apply text-white;

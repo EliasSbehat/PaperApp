@@ -32,5 +32,9 @@ export default {
       justify-center 
       shadow-lg;
   border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+.fab-button:hover {
+  @apply bg-paperdazgreen-70 text-white
 }
 </style>
