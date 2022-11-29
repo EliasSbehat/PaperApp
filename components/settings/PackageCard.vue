@@ -66,7 +66,7 @@
     <div class="grid place-items-center" v-if="showBottomButton">
       <button
         @click="setPackageData"
-        class="text-sm text-white bg-paperdazgreen-400 rounded-lg shadow h-9 px-5"
+        class="text-sm text-white bg-paperdazgreen-400 hover:bg-paperdazgreen-70 transition duration-0 hover:duration-150 transition duration-0 hover:duration-150 rounded-lg shadow h-9 px-5"
       >
         Start Now
       </button>

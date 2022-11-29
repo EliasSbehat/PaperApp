@@ -58,7 +58,7 @@
                       </div>
                       <div class="col-lg-12">
                         <button
-                          class="btn btn-success next-btn"
+                          class="rounded shadow px-2 next-btn bg-paperdazgreen-300 hover:bg-paperdazgreen-70 transition duration-0 hover:duration-150 text-white"
                         >
                           Next >
                         </button>

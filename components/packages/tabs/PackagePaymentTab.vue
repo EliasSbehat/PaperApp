@@ -1,98 +1,138 @@
 <template>
-  <div>
-    <form class="" @submit="submit">
-      <div class="grid place-items-center mb-10">
-        <img
-          src="/img/payment-types.png"
-          alt="Payment types"
-          width="400"
-          class="max-w-full max-h-[50px] object-contain"
+  <div class="">
+    <div class="flex flex-wrap gap-3 md:grid md:grid-cols-8">
+      <div class="col-span-1"></div>
+      <div class="col-span-2">
+        <package-card
+          :edited="false"
+          :create="false"
+          show-bottom-button
+          class="package-card-check-width"
+          :style="{ '--count': 1 }"
+          @bottom-button-clicked="$emit('next-tab', $event)"
+          :stagingPackage="stagingPackage"
         />
       </div>
-      <message-alert-widget
-        class="mb-7"
-        :message="errorMessage"
-        v-if="errorMessage"
-        :type="'error'"
-      />
-      <div class="form-group">
-        <label class="input-label" for="">Business hook</label>
-        <el-input
-          :disabled="loading"
-          placeholder="Name Surname"
-          required
-          v-model="hook"
-        />
-        <div class="text-xs text-red-600 py-1">{{hookMessage}}</div>
-      </div>
-      <div class="form-group">
-        <label class="input-label" for="">Company name</label>
-        <el-input
-          :disabled="loading"
-          placeholder="Name Surname"
-          required
-          v-model="companyName"
-        />
-      </div>
-      <div class="form-group">
-        <label class="input-label" for="">Name of card holder</label>
-        <el-input
-          :disabled="loading"
-          placeholder="Name Surname"
-          required
-          v-model="name"
-        />
-      </div>
-      <div class="form-group">
-        <label class="input-label" for="">Card Number</label>
-        <el-input
-          :disabled="loading"
-          placeholder="0000-0000-0000-0000"
-          :value="cardNumberWithDashes"
-          @input="inputCardNumber"
-          required
-        />
-      </div>
-      <div class="grid gap-5 grid-cols-2">
-        <div class="form-group">
-          <label class="input-label" for="">Expiration Date</label>
-          <el-input
-            :disabled="loading"
-            placeholder="MM/YY"
-            required
-            :value="expirationDateWithSlashes"
-            @input="inputExpirationDate"
+      <div class="col-span-4">
+        <form class="bg-paperdazgreen-400" @submit="submit">
+          <div class="form-group">
+            <div v-if="tooltip" class="absolute p-2 bg-white text-sm rounded-lg border -mt-16 w-[400px]">
+               Enter the name you want visitors to search for your business.
+               <div class="rotate-45 bg-white w-[20px] h-[20px]" data-popper-arrow="" style="position: absolute;top:41px; left: 180px;"></div>
+            </div>
+            <label class="input-label font-bold" for=""
+              >Create business hook  &nbsp;&nbsp;&nbsp;
+              <svg
+                @mouseover="tooltip = true"
+                @mouseleave="tooltip = false"
+                class="inline"
+                width="25"
+                height="25"
+                viewBox="0 0 25 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                data-bs-toggle="tooltip" title="Hi! I'm tooltip"
+              >
+                <path
+                  d="M12.1094 0C5.42202 0 0 5.42397 0 12.1094C0 18.7987 5.42202 24.2188 12.1094 24.2188C18.7967 24.2188 24.2188 18.7987 24.2188 12.1094C24.2188 5.42397 18.7967 0 12.1094 0ZM12.1094 5.37109C13.242 5.37109 14.1602 6.28926 14.1602 7.42188C14.1602 8.55449 13.242 9.47266 12.1094 9.47266C10.9768 9.47266 10.0586 8.55449 10.0586 7.42188C10.0586 6.28926 10.9768 5.37109 12.1094 5.37109ZM14.8438 17.7734C14.8438 18.097 14.5814 18.3594 14.2578 18.3594H9.96094C9.63735 18.3594 9.375 18.097 9.375 17.7734V16.6016C9.375 16.278 9.63735 16.0156 9.96094 16.0156H10.5469V12.8906H9.96094C9.63735 12.8906 9.375 12.6283 9.375 12.3047V11.1328C9.375 10.8092 9.63735 10.5469 9.96094 10.5469H13.0859C13.4095 10.5469 13.6719 10.8092 13.6719 11.1328V16.0156H14.2578C14.5814 16.0156 14.8438 16.278 14.8438 16.6016V17.7734Z"
+                  fill="black"
+                />
+              </svg>
+            </label>
+            <el-input
+              :disabled="loading"
+              placeholder="Name Surname"
+              required
+              v-model="hook"
+            />
+            <div class="text-xs text-red-600 py-1">{{ hookMessage }}</div>
+          </div>
+          <div class="h-1 bg-black"></div>
+          <div class="h-4"></div>
+          <div class="grid mb-10">
+            <label class="input-label font-bold" for="">
+              Credit Card
+              <payment-icon />
+            </label>
+          </div>
+          <message-alert-widget
+            class="mb-7"
+            :message="errorMessage"
+            v-if="errorMessage"
+            :type="'error'"
           />
-        </div>
-        <div class="form-group">
-          <label class="input-label" for="">CVV</label>
-          <el-input
-            :disabled="loading"
-            placeholder="000"
-            required
-            v-model="cvv"
-            type="password"
-            maxlength="3"
-          />
-        </div>
-      </div>
 
-      <div class="grid place-items-center mt-6">
-        <button
-          class="rounded-lg bg-paperdazgreen-400 text-white shadow text-sm h-10 px-6 disabled:bg-opacity-50"
-          :disabled="loading"
-        >
-          <span class="inline-flex items-center gap-3">
-            <span>Pay via Stripe</span>
-            <transition name="fade" :duration="100">
-              <span v-show="loading" class="animate-spin">
-                <spinner-dotted-icon height="22" width="22" />
+          <!-- <div class="form-group">
+            <label class="input-label" for="">Company name</label>
+            <el-input
+              :disabled="loading"
+              placeholder="Name Surname"
+              required
+              v-model="companyName"
+            />
+          </div> -->
+          <div class="form-group">
+            <label class="input-label" for="">Name of card holder</label>
+            <el-input
+              :disabled="loading"
+              placeholder="Name Surname"
+              required
+              v-model="name"
+            />
+          </div>
+          <div class="form-group">
+            <label class="input-label" for="">Card Number</label>
+            <el-input
+              :disabled="loading"
+              placeholder="0000-0000-0000-0000"
+              :value="cardNumberWithDashes"
+              @input="inputCardNumber"
+              required
+            />
+          </div>
+          <div class="grid gap-5 grid-cols-2">
+            <div class="form-group">
+              <label class="input-label" for="">Expiration Date</label>
+              <el-input
+                :disabled="loading"
+                placeholder="MM/YY"
+                required
+                :value="expirationDateWithSlashes"
+                @input="inputExpirationDate"
+              />
+            </div>
+            <div class="form-group">
+              <label class="input-label" for="">CVC</label>
+              <el-input
+                :disabled="loading"
+                placeholder="000"
+                required
+                v-model="cvv"
+                type="password"
+                maxlength="3"
+              />
+            </div>
+          </div>
+
+          <div class="grid place-items-center mt-6">
+            <button
+              class="rounded-lg bg-white shadow text-sm h-10 px-6 disabled:bg-opacity-50 w-full"
+              :disabled="loading"
+            >
+              <span class="inline-flex items-center gap-3">
+                <span>Pay via Stripe</span>
+                <transition name="fade" :duration="100">
+                  <span v-show="loading" class="animate-spin">
+                    <spinner-dotted-icon height="22" width="22" />
+                  </span>
+                </transition>
               </span>
-            </transition>
-          </span>
-        </button>
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+      <div class="col-span-1"></div>
+    </div>
   </div>
 </template>
 
@@ -100,13 +140,14 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
 import SpinnerDottedIcon from '~/components/svg-icons/SpinnerDottedIcon.vue'
+import PaymentIcon from '~/components/svg-icons/PaymentIcon.vue'
 import MessageAlertWidget from '~/components/widgets/MessageAlertWidget.vue'
 import login from '~/mixins/login'
 import { ErrorHandler } from '~/components/functions/ErrorFunction'
+import PackageCard from '~/components/settings/PackageCard.vue'
 import UserTypeEnum from '~/models/UserTypeEnum'
-
 export default Vue.extend({
-  components: { SpinnerDottedIcon, MessageAlertWidget },
+  components: { SpinnerDottedIcon, MessageAlertWidget, PackageCard },
   name: 'PackagePaymentTab',
   data() {
     return {
@@ -118,8 +159,9 @@ export default Vue.extend({
       cardId: undefined,
       expirationDateWithSlashes: '',
       hook: '@',
-      hookMessage:'',
-      companyName: ''
+      hookMessage: '',
+      companyName: '',
+      tooltip : false
     }
   },
   props: {
@@ -127,11 +169,15 @@ export default Vue.extend({
       type: Object,
       default: () => ({}),
     },
+    packages: {
+      type: Array,
+      default: () => [],
+    },
   },
   async beforeMount() {
     !this.$auth.loggedIn ? this.notLoggedIn() : null
     // if (Object.keys(this.stagingPackageInfo).length < 1)
-      // this.$nuxt.$router.go(-1)
+    // this.$nuxt.$router.go(-1)
   },
   computed: {
     ...mapState(['setPackage', 'createPackage']),
@@ -192,11 +238,17 @@ export default Vue.extend({
     expMonth() {
       return this.expirationDateString.split('').splice(0, 2).join('')
     },
+    stagingPackage() {
+      return this.$store.state.setPackage
+    },
   },
   methods: {
-    notLoggedIn(){
-      localStorage.setItem("package-not-loggedin", JSON.stringify(this.setPackage))
-      localStorage.setItem("create-package-not-loggedin", this.createPackage)
+    notLoggedIn() {
+      localStorage.setItem(
+        'package-not-loggedin',
+        JSON.stringify(this.setPackage)
+      )
+      localStorage.setItem('create-package-not-loggedin', this.createPackage)
       this.$nuxt.$router.push('/register')
     },
     inputCardNumber(val) {
@@ -241,7 +293,7 @@ export default Vue.extend({
     async submit(event) {
       event?.preventDefault()
 
-      if(this.hookMessage) return
+      if (this.hookMessage) return
 
       if (!this.expYear || !this.expMonth || isNaN(this.cvv)) {
         this.errorMessage = 'Please review the inputed information'
@@ -256,7 +308,6 @@ export default Vue.extend({
       var format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~0-9]/
       this.errorMessage = 'Company name not correct'
       if (format.test(this.companyName.trim())) return
-
 
       if (this.loading) return
 
@@ -316,40 +367,46 @@ export default Vue.extend({
     },
   },
   mounted() {
-    if (this.$auth?.user?.role == UserTypeEnum.TEAM) {
-      this.errorMessage =
-        'Proceeding to payment as a team member, payment may not reflect on the account. create a free account to access payment'
-    }
+    // console.log(this.packages[0].name, "packages");
+    console.log(this.$store.state.setPackage.name, 'packages')
+    console.log(this.stagingPackage.name, 'packages')
+
+    // if (this.$auth?.user?.role == UserTypeEnum.TEAM) {
+    //   this.errorMessage =
+    //     'Proceeding to payment as a team member, payment may not reflect on the account. create a free account to access payment'
+    // }
   },
   watch: {
-     "hook": function(){
-      if(!this.hook.startsWith("@")) this.hookMessage = 'hook must start with @'
-        this.$axios.get(`/users?hook=${this.hook}`)
-        .then((response)=>{
+    hook: function () {
+      if (!this.hook.startsWith('@'))
+        this.hookMessage = 'hook must start with @'
+      this.$axios
+        .get(`/users?hook=${this.hook}`)
+        .then((response) => {
           const { data } = response.data
           if (Array.isArray(data) && data.length) {
-            console.log("not-empty",data)
+            console.log('not-empty', data)
           }
           this.hookMessage = ''
         })
-        .catch((err)=>{
-           this.hookMessage = err.message
+        .catch((err) => {
+          this.hookMessage = err.message
         })
-     }
-  }
+    },
+  },
 })
 </script>
 
 <style lang="scss" scoped>
 form {
-  @apply p-6 rounded-xl border-4 border-paperdazgreen-400 bg-white;
+  @apply p-6 rounded-xl border-4 border-paperdazgreen-400;
   width: 100%;
   max-width: 580px;
   margin: 0 auto;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .input-label {
-  @apply font-medium text-sm block;
+  @apply font-bold text-sm block;
 
   & + * {
     @apply mt-1;

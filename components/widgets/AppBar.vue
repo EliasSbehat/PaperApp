@@ -1,10 +1,10 @@
 <template>
   <div
     class="sticky z-20 h-14 pt-5 pb-5 transition ease-in-out"
-    :class="{
+    :class="[{
       'shadow-md': scrolled,
       'bg-white': scrolled,
-    }"
+    }, landingPage?'bg-white':'']"
     style="top: -0.1px; padding-top: 48px"
     id="appbar"
   >
@@ -40,17 +40,17 @@
           </nuxt-link>
         </div>
        
-          <a href="/#key-features-section" class="">Features </a>
+          <a href="/#key-features-section" class="xs:ml-6">Features </a>
           <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
-          <!-- <a href="/#upload-file-section" class="">Upload File </a> -->
+          <!-- <a href="/#upload-file-section" class="xs:ml-6">Upload File </a> -->
           <!-- <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div> -->
-          <nuxt-link to="/packages/?type=default" class="">Packages </nuxt-link>
+          <nuxt-link to="/packages/?type=default" class="xs:ml-6">Packages </nuxt-link>
           <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
-          <nuxt-link to="/about" class="">About </nuxt-link>
+          <nuxt-link to="/about" class="xs:ml-6">About </nuxt-link>
           <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
-          <nuxt-link to="/faq" class="">FAQ</nuxt-link>
+          <nuxt-link to="/faq" class="xs:ml-6">FAQ</nuxt-link>
           <div class="h-px bg-paperdazgray-300 w-full lg:hidden"></div>
-          <nuxt-link to="/contact-us" class="">Contact Us </nuxt-link>
+          <nuxt-link to="/contact-us" class="xs:ml-6">Contact Us </nuxt-link>
 
         <div
           class="h-px bg-paperdazgray-300 w-full lg:hidden"
@@ -226,12 +226,18 @@ export default mixins(GlobalMixin).extend({
       scrolled: false,
       collapsed: false,
       showLandingPageSearchModal: false,
+      landingPage: true,
     }
   },
   watch: {
     $route(formerVal, currentVal) {
       if (formerVal.fullPath !== currentVal.fullPath) {
         this.collapsed = false
+      }
+      if (formerVal.name=="index") {
+        this.landingPage = true
+      } else {
+        this.landingPage = false
       }
     },
   },
@@ -256,6 +262,7 @@ export default mixins(GlobalMixin).extend({
       }
     },
   },
+  
   mounted() {
     const self = this
     this.scrollObserver()

@@ -131,7 +131,6 @@ export default mixins(GlobalMixin).extend({
       const packages = await this.$axios
         .$get(`/packages/?${type}=${property}&isActive=1`)
         .then((response) => {
-          console.log('package-response', response)
           this.packages = response
           this.alertEmptypackage(response.length < 1)
         })
