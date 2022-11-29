@@ -217,6 +217,9 @@ export default Vue.extend({
      this.inputs.push(this.inputs.length)
     },
     async  _generatePdf(val){
+      val.pdf_url = `${window.location.origin}/pdf/${this.userFile.paperLink}`;
+      val.pdf_url = this.userFile?.downloadLink;
+      console.log(val, "testing");
       if(val.data.length < 1 && !this.userFile) return
 
         await this.$axios.$post(`/pdf-generator`, { ...val })
@@ -277,26 +280,28 @@ export default Vue.extend({
       this.$emit('updateVisibility', false)
     },
     async onSubmit(event) {
-    event?.preventDefault()
-       
-    this.loading = true
-
-    let requestData = {}
+      event?.preventDefault()
+      
+      this.loading = true
+      
+      let requestData = {}
     let emails = []
-
+    
     //<---------START: looping through the form data elements --------->>
     Array.from(event.target.elements).forEach(element => {
-    if(element.type == 'email')
-     emails.push(element.value)
+      if(element.type == 'email')
+      emails.push(element.value)
     });
-  
+    
     //<---------END: looping through the form data elements --------->>
-
-     //<---------START: generating edited Pdf --------->>
-    await this._generatePdf(ExtractFormPdf(this.userFile?.downloadLink)[0])
+    
+    //<---------START: generating edited Pdf --------->>
+    console.log(ExtractFormPdf(this.userFile?.downloadLink), 123);
+    await this._generatePdf(ExtractFormPdf(this.userFile?.downloadLink)[0])     //this issue
+    
     // await this.uploadGeneratedFile(this.generateFileProperty)
-     //<---------END: generating edited Pdf --------->>
-
+    //<---------END: generating edited Pdf --------->>
+    
     if(!this.proceedToRequest) return
 
     //<---------START:  setting request data payload --------->>

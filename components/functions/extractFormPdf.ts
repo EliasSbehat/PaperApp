@@ -158,21 +158,25 @@ export const ExtractFormPdf = ({
     data: [],
   }
   let getToUserAction: any = []
-
+  
   //<< -- code for external added conponent -->>
   let pdfPages = document.querySelectorAll('.pdf-single-page-outer')
   let canvasPdf = document.querySelectorAll('.pdf-page')
   let totalArray = Array.from(pdfPages)
 
-  pdfScrappedData.pdfHeight =
-    canvasPdf[0].children[0].tagName == 'CANVAS'
-      ? canvasPdf[0].children[0].getBoundingClientRect().height
-      : canvasPdf[0].children[1].getBoundingClientRect().height
-  pdfScrappedData.pdfWidth =
-    canvasPdf[0].children[0].tagName == 'CANVAS'
-      ? canvasPdf[0].children[0].getBoundingClientRect().width
-      : canvasPdf[0].children[1].getBoundingClientRect().width
-
+  if (canvasPdf.length) {
+    pdfScrappedData.pdfHeight =
+      canvasPdf[0].children[0].tagName == 'CANVAS'
+        ? canvasPdf[0].children[0].getBoundingClientRect().height
+        : canvasPdf[0].children[1].getBoundingClientRect().height
+    pdfScrappedData.pdfWidth =
+      canvasPdf[0].children[0].tagName == 'CANVAS'
+        ? canvasPdf[0].children[0].getBoundingClientRect().width
+        : canvasPdf[0].children[1].getBoundingClientRect().width
+  } else {
+    pdfScrappedData.pdfHeight = 0;
+    pdfScrappedData.pdfWidth = 0;
+  }
   totalArray.forEach((element) => {
     if ((file || {}).fileAction == FileAction.CONFIRM) {
       appendDefaultConfirmSign({
