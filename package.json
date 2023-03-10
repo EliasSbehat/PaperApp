@@ -48,7 +48,7 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-twitter": "^0.1.5",
     "pdfjs": "^2.4.7",
-    "pdfjs-dist": "2.6.347",
+    "pdfjs-dist": "3.4.120",
     "qrcode": "^1.5.0",
     "qrcode.vue": "^1.6.2",
     "redirect-ssl": "^3.0.0",
