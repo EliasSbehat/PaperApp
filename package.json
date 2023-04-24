@@ -49,7 +49,7 @@
     "passport-twitter": "^0.1.5",
     "pdfjs": "^2.4.7",
     "pdfjs-dist": "3.4.120",
-    "qrcode": "^1.5.0",
+    "qrcode": "^1.5.3",
     "qrcode.vue": "^3.3.4",
     "redirect-ssl": "^3.0.0",
     "signature_pad": "^4.1.5",
