@@ -82,7 +82,7 @@
     "@types/cookie-session": "^2.0.43",
     "@types/dom-to-image": "^2.6.4",
     "@types/jsonwebtoken": "^8.5.6",
-    "@types/lodash": "^4.14.178",
+    "@types/lodash": "^4.14.194",
     "@types/passport-facebook": "^2.1.11",
     "@types/passport-google-oauth": "^1.0.42",
     "@types/passport-google-oauth20": "^2.0.11",
